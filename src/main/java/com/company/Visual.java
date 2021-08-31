@@ -1,19 +1,12 @@
 package com.company;
 
-import javafx.scene.layout.Background;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BandCombineOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-
-
-import static com.company.Main.*;
 
 public class Visual {
 
@@ -24,10 +17,10 @@ public class Visual {
     static Integer [][]m = new Integer[19][19];
     static String []Player = new String[2];
 
-    public static void Style(JButton [][]b)
+    public void Style(JButton [][]b)
     {
         JButton but = new JButton();
-        but.setIcon(new ImageIcon("ff.png"));
+        but.setIcon(getImage("images/ff.png"));
         but.setBorderPainted(false);
         but.setFocusPainted(false);
         but.setContentAreaFilled(false);
@@ -35,7 +28,7 @@ public class Visual {
 
 
 
-    public static JLabel AddLabel(String text, int x, int y, Color c)
+    public JLabel AddLabel(String text, int x, int y, Color c)
     {
 
         JLabel winner;
@@ -48,7 +41,7 @@ public class Visual {
     }
 
 
-    public static void Buttons(JButton but)
+    public void Buttons(JButton but)
     {
         JButton []b = new JButton[10];
         Color act = new Color(10, 224, 200, 124);
@@ -67,7 +60,7 @@ public class Visual {
             if (main[0] == 1 && main[1] == 1 && main[5] == 0)
             {
                 m[8][8] = 1;
-                but.setIcon(new ImageIcon(Player[0]));
+                but.setIcon(getImage(Player[0]));
                 main[5]++;
             }});
 
@@ -125,7 +118,7 @@ public class Visual {
 
     }
 
-    public static JButton AddBut(String text, int x, int y, int w, int h, Color c, String name, int f)
+    public JButton AddBut(String text, int x, int y, int w, int h, Color c, String name, int f)
     {
         JButton but = new JButton(text);
         Font font = new Font("Serif", Font.BOLD, 18);
@@ -154,10 +147,10 @@ public class Visual {
 
 
     public Visual() {
-        Background[0] = "fon3.jpg";
-        Background[1] = "fon3.jpg";
-        Player[0] = "skin6.jpg";
-        Player[1] = "one3.png";
+        Background[0] = getClass().getResource("/images/fon3.jpg").getPath();
+        Background[1] = getClass().getResource("/images/fon3.jpg").getPath();
+        Player[0] = getClass().getResource("/images/skin6.jpg").getPath();
+        Player[1] = getClass().getResource("/images/one3.png").getPath();
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -209,8 +202,8 @@ public class Visual {
                         but[nx][ny].setBounds(x, y, 40, 40);
 
 
-                        but[nx][ny].setIcon(new ImageIcon("ff.png"));
-                        but[nx][ny].setRolloverIcon(new ImageIcon("cur.jpg"));
+                        but[nx][ny].setIcon(getImage("images/ff.png"));
+                        but[nx][ny].setRolloverIcon(getImage("images/cur.jpg"));
                         but[nx][ny].setBorderPainted(false);
                         but[nx][ny].setFocusPainted(false);
                         but[nx][ny].setContentAreaFilled(false);
@@ -241,7 +234,7 @@ public class Visual {
         });
     }
 
-    public static class TestPane extends JPanel {
+    public class TestPane extends JPanel {
 
         public TestPane() {
         }
@@ -285,6 +278,10 @@ public class Visual {
 
         }
 
+    }
+
+    private ImageIcon getImage(String imagePath) {
+        return new ImageIcon(getClass().getResource("/" + imagePath));
     }
 }
 
